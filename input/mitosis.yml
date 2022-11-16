@@ -1,0 +1,119 @@
+# `U` is a predefined unit of measure that means 19.05mm, which is MX spacing
+points:
+  zones:
+    matrix:
+      columns:
+        pinky:
+          key:
+            column_net: P14
+            column_mark: P
+        ring:
+          stagger: 0.26U
+          key:
+            column_net: P16
+            column_mark: R        
+        middle:
+          stagger: 0.25U
+          key:
+            column_net: P10
+            column_mark: M          
+        index:
+          stagger: -0.25U
+          key:
+            column_net: P9
+            column_mark: X          
+        inner:
+          stagger: 0.1U
+          key:
+            column_net: P8
+            column_mark: I
+      rows:
+        bottom:
+          padding: U
+          row_net: P15
+          row_mark: RB
+        home:
+          padding: U
+          row_net: P18
+          row_mark: RH
+        top:
+          padding: U
+          row_net: P19
+          row_mark: RT
+    thumb:
+      anchor:
+        ref: matrix_ring_bottom
+        shift: [0.8U, -2.5U]
+        rotate: 7
+      columns:
+        ring:
+          key:
+            column_net: P4
+        middle:
+          key:
+            column_net: P5
+        index:
+          spread: U
+          key:
+            column_net: P6
+        inner:
+          spread: U
+          key:
+            column_net: P7
+      rows:
+        bottom:
+          padding: U
+          row_net: P3
+        top:
+          padding: U
+          row_net: P2
+  key:
+    footprints:
+      - type: mx
+        nets:
+          from: =row_net
+          to: =column_net
+        params:
+          reverse: true
+          keycaps: true
+          hotswap: true
+pcbs:
+  mitosis_split:
+    footprints:
+      promicro:
+        type: promicro_pretty
+        anchor:
+          ref: thumb_ring_bottom
+          shift: [-1.25u, 0.5u]
+          rotate: 90
+        params:
+          orientation: up
+      powerswitch:
+        type: pcm12
+        anchor:
+          ref: thumb_ring_bottom
+          shift: [-25, -8]
+        nets:
+          from: pos  
+          to: RAW
+        params:
+          reverse: true
+      reset:
+        type: b3u1000p
+        nets:
+          r1: RST  
+          r2: GND
+        anchor:
+          ref: thumb_ring_bottom
+          shift: [-12, -5]
+          rotate: 90
+        params:
+          reverse: true 
+      bat:
+        type: bat
+        nets: 
+          neg: GND
+        anchor:
+          ref: thumb_ring_bottom
+          shift: [-24, -8]
+          rotate: -90
